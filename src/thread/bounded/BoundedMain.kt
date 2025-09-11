@@ -3,15 +3,24 @@ package thread.bounded
 import util.MyLogger.Companion.log
 import util.ThreadUtils.Companion.sleep
 
-fun main(){
-    val queue = BoundedQueueV1(max = 2)
+fun main() {
+    val queue =
+//        BoundedQueueV1(max = 2)
+//        BoundedQueueV2(max = 2)
+//        BoundedQueueV3(max = 2)
+//        BoundedQueueV4(max = 2)
+//        BoundedQueueV5(max = 2)
+//        BoundedQueueV6_1(max = 2)
+//        BoundedQueueV6_2(max = 2)
+//        BoundedQueueV6_3(max = 2)
+        BoundedQueueV6_4(max = 2)
 
-//    produceFirst(queue)
-    consumerFirst(queue)
+    produceFirst(queue)
+//    consumerFirst(queue)
 
 }
 
-fun produceFirst(queue: BoundedQueue){
+fun produceFirst(queue: BoundedQueue) {
 
     log("== [생산자 먼저 실행] 시작 ${queue.javaClass.simpleName}")
     val threads = ArrayList<Thread>()
@@ -22,7 +31,7 @@ fun produceFirst(queue: BoundedQueue){
     log("== [생산자 먼저 실행] 종료, ${queue.javaClass.simpleName}")
 }
 
-fun consumerFirst(queue: BoundedQueue){
+fun consumerFirst(queue: BoundedQueue) {
 
     log("== [소비자 먼저 실행] 시작 ${queue.javaClass.simpleName}")
     val threads = ArrayList<Thread>()
@@ -33,10 +42,10 @@ fun consumerFirst(queue: BoundedQueue){
     log("== [소비자 먼저 실행] 종료, ${queue.javaClass.simpleName}")
 }
 
-fun startProducer(queue: BoundedQueue, threads: MutableList<Thread>){
+fun startProducer(queue: BoundedQueue, threads: MutableList<Thread>) {
     println()
     log("생산자 시작")
-    (1..3).forEach { it->
+    (1..3).forEach { it ->
         val producer: Thread = Thread(ProducerTask(queue, "data $it"), "producer $it")
         threads.add(producer)
         producer.start()
@@ -44,7 +53,7 @@ fun startProducer(queue: BoundedQueue, threads: MutableList<Thread>){
     }
 }
 
-fun startConsumer(queue: BoundedQueue, threads: MutableList<Thread>){
+fun startConsumer(queue: BoundedQueue, threads: MutableList<Thread>) {
     println()
     log("소비자 시작")
     (1..3).forEach { it ->
@@ -55,10 +64,10 @@ fun startConsumer(queue: BoundedQueue, threads: MutableList<Thread>){
     }
 }
 
-fun printAllState(queue: BoundedQueue, threads: MutableList<Thread>){
+fun printAllState(queue: BoundedQueue, threads: MutableList<Thread>) {
     println()
     log("현재 상태 출력, 큐 데이터 : $queue")
-    threads.forEach { it->
+    threads.forEach { it ->
         log("${it.name} : ${it.state}")
     }
 }
