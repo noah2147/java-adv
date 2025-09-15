@@ -7,7 +7,6 @@ class RunnableTask(
     val name: String,
     val sleepMs: Long = 1000
 ) : Runnable {
-
     override fun run() {
         log("${this.name} start")
         sleep(sleepMs)
